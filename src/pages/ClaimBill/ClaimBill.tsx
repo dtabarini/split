@@ -1,16 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import Bill from '../../Interfaces/Bill'
-import Item from '../../Interfaces/Item';
+import React from "react";
+import logo from "./logo.svg";
+import Item from "../../interfaces/Item";
 
 const testItem: Item = {
   name: "abc",
   price: 12,
   quantity: 1,
-  isClaimed: false
-}
-const testItems: Item[] = 
-  [testItem, testItem, testItem]
+  isClaimed: false,
+};
+const testItems: Item[] = [testItem, testItem, testItem];
 
 const example: Bill = {
   Id: "string",
@@ -19,16 +17,11 @@ const example: Bill = {
   Tax: 8.23,
   Tip: 3,
   PaymentProviderName: "string",
-  PaymentInformation: "string", 
-}
+  PaymentInformation: "string",
+};
 
 function ClaimBill() {
-  return (
-    <div>
-     ClaimBillPage
-     Pop
-    </div>
-  );
+  return <div>ClaimBillPage Pop</div>;
 }
 
 export default ClaimBill;
