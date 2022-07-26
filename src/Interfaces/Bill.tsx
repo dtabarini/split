@@ -1,5 +1,5 @@
-import "./Item"
-xport default interface Bill {
+import Item from "./Item";
+export default interface Bill {
   Id: string;
   Items: Item[];
   ClaimedItems: Item[];

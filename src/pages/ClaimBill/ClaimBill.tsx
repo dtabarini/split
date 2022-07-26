@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import Item from "../../interfaces/Item";
+import Bill from "../../interfaces/Bill";
 
 const testItem: Item = {
   name: "abc",
