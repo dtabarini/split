@@ -1,6 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import "./pages/LandingPage/LandingPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import EditBill from "./pages/EditBill/EditBill";
+import ClaimBill from "./pages/ClaimBill/ClaimBill";
 
 function App() {
   return (
@@ -19,6 +24,14 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />}></Route>
+          <Route path="/edit" element={<EditBill />}></Route>
+          <Route path="/view" element={<ClaimBill />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
