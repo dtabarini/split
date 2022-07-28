@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const AppArea = styled.div`
-  width: 400px;
+  max-width: 400px;
   background-color: white;
   margin: auto;
   padding-top: 100px;
@@ -13,7 +13,6 @@ const AppArea = styled.div`
 const Background = styled.div`
   background-color: rgb(233, 224, 242);
   height: 100vh;
-  padding-top: 120px;
 `;
 
 function AppContainer(props: any) {
