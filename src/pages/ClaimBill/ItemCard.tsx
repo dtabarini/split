@@ -3,7 +3,17 @@ import Item from "../../interfaces/Item";
 import styled from "styled-components";
 import Stack from "@mui/material/Stack";
 import Bill from "../../interfaces/Bill";
+import AddUserButton from "./AddUserButton";
 
+export interface IItemCard {
+  item: Item;
+  currentUser: string;
+  bill: Bill;
+  itemIdx: number;
+  users: string[];
+  setUsers: React.Dispatch<React.SetStateAction<string[]>>;
+  setBill: React.Dispatch<React.SetStateAction<Bill>>;
+}
 const ItemNameTitle = styled.span`
   text-align: left;
 `;
@@ -25,13 +35,7 @@ const Card: any = styled("div")<{ active: boolean }>`
     `};
 `;
 
-function ItemCard(props: {
-  item: Item;
-  setBill: any;
-  currentUser: string;
-  bill: Bill;
-  itemIdx: number;
-}) {
+function ItemCard(props: IItemCard) {
   const [active, setActive] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -42,7 +46,6 @@ function ItemCard(props: {
     } else {
       props.item.claimedBy.push(props.currentUser);
     }
-    console.log(props.item.claimedBy);
     props.setBill({ ...props.bill });
     setActive(!active);
   };
@@ -55,6 +58,7 @@ function ItemCard(props: {
         {props.item.claimedBy?.map((name) => (
           <NameSpan key={name}>{name}</NameSpan>
         ))}
+        <AddUserButton {...props} />
       </Stack>
     </Card>
   );

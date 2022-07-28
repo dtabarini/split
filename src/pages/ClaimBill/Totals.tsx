@@ -16,13 +16,10 @@ const PriceSpan = styled.span`
 
 function Totals(props: { bill: Bill }) {
   const emptyItemArr: Item[] = [];
-  // const useState;
   const reversedDictionary = new Map<string, Item[]>();
   const unclaimedItems: Item[] = [];
 
   function reverseBill() {
-    console.log("in reverse bill");
-    console.log(reversedDictionary);
     for (const item of props.bill.Items) {
       if (item.claimedBy.length === 0) {
         unclaimedItems.push(item);
@@ -64,14 +61,18 @@ function Totals(props: { bill: Bill }) {
   function round(n: number) {
     return Math.round(n * 100) / 100;
   }
-  console.log("rerender");
-  console.log(reversedDictionary);
+
+  function getItemSplitCount(item: Item) {
+    const itemIdx = props.bill.Items.indexOf(item);
+    const length = props.bill.Items[itemIdx].claimedBy.length;
+    return length;
+  }
   return (
     <IndentDiv>
       {unclaimedItems.length > 0 && "Unclaimed items"}
       <IndentDiv>
         {unclaimedItems.map((item) => (
-          <div>
+          <div key={item.id}>
             <span>{item.name}</span>
             <PriceSpan> {item.price}</PriceSpan>
           </div>
@@ -85,10 +86,11 @@ function Totals(props: { bill: Bill }) {
             {items.map((item) => (
               <div key={item.id}>
                 <span>
-                  {items.length > 1 && "1/" + items.length + " "}
+                  {getItemSplitCount(item) > 1 &&
+                    "1/" + getItemSplitCount(item) + " "}
                   {item.name}{" "}
                 </span>
-                <PriceSpan> {item.price / items.length}</PriceSpan>
+                <PriceSpan> {item.price / getItemSplitCount(item)}</PriceSpan>
               </div>
             ))}
             <div>
