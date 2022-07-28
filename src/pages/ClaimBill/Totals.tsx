@@ -5,27 +5,27 @@ import ItemCard from "./ItemCard";
 import styled from "styled-components";
 import EditBill from "../EditBill/EditBill";
 
+const IndentDiv = styled.div`
+  margin-left: 10px;
+`;
+const PriceSpan = styled.span`
+  margin: auto;
+  float: right;
+  margin-right: 100px;
+`;
+
 function Totals(props: { bill: Bill }) {
   const emptyItemArr: Item[] = [];
   // const useState;
   const reversedDictionary = new Map<string, Item[]>();
-
-  const IndentDiv = styled.div`
-    margin-left: 10px;
-  `;
-  const PriceSpan = styled.span`
-    margin: auto;
-    float: right;
-    margin-right: 100px;
-  `;
+  const unclaimedItems: Item[] = [];
 
   function reverseBill() {
+    console.log("in reverse bill");
+    console.log(reversedDictionary);
     for (const item of props.bill.Items) {
-      console.log(item);
-      if (item.claimedBy?.length === 0) {
-        reversedDictionary.has("unclaimed")
-          ? reversedDictionary.get("unclaimed")!.push(item)
-          : reversedDictionary.set("unclaimed", [item]);
+      if (item.claimedBy.length === 0) {
+        unclaimedItems.push(item);
       }
       for (const name of item.claimedBy!) {
         reversedDictionary.has(name)
@@ -33,10 +33,8 @@ function Totals(props: { bill: Bill }) {
           : reversedDictionary.set(name, [item]);
       }
     }
-    console.log(reversedDictionary);
   }
   reverseBill();
-  console.log(...reversedDictionary.keys());
 
   function calculateItemsTotal(items: Item[]) {
     let total = 0;
@@ -66,14 +64,26 @@ function Totals(props: { bill: Bill }) {
   function round(n: number) {
     return Math.round(n * 100) / 100;
   }
+  console.log("rerender");
+  console.log(reversedDictionary);
   return (
     <IndentDiv>
+      {unclaimedItems.length > 0 && "Unclaimed items"}
+      <IndentDiv>
+        {unclaimedItems.map((item) => (
+          <div>
+            <span>{item.name}</span>
+            <PriceSpan> {item.price}</PriceSpan>
+          </div>
+        ))}
+      </IndentDiv>
+
       {[...reversedDictionary.entries()].map(([name, items]) => (
         <div key={name}>
           {name}
           <IndentDiv>
             {items.map((item) => (
-              <div>
+              <div key={item.id}>
                 <span>
                   {items.length > 1 && "1/" + items.length + " "}
                   {item.name}{" "}

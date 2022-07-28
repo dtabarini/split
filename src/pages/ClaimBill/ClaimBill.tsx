@@ -49,7 +49,7 @@ const Title = styled.div`
 `;
 
 function ClaimBill() {
-  const [name, setName] = useState<string>("Dylan");
+  const [currentUser, setCurrentUser] = useState<string>("Dylan");
   const [bill, setBill] = useState<Bill>(testBill);
 
   function hc() {
@@ -58,10 +58,17 @@ function ClaimBill() {
 
   return (
     <div>
-      <NameTitle>{name}</NameTitle>
+      <NameTitle>{"Hey, " + currentUser}</NameTitle>
       <Title>Items</Title>
-      {bill.Items.map((item) => (
-        <ItemCard key={item.id} item={item} />
+      {bill.Items.map((item, idx) => (
+        <ItemCard
+          key={idx}
+          item={item}
+          setBill={setBill}
+          currentUser={currentUser}
+          bill={bill}
+          itemIdx={idx}
+        />
       ))}
       <Title>Totals</Title>
       {<Totals bill={bill}></Totals>}
