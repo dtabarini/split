@@ -40,11 +40,9 @@ function ItemCard(props: IItemCard) {
 
   const handleClick = () => {
     if (active) {
-      props.item.claimedBy = props.item.claimedBy.filter(
-        (name) => name !== props.currentUser
-      );
+      props.item.claimedBy.delete(props.currentUser);
     } else {
-      props.item.claimedBy.push(props.currentUser);
+      props.item.claimedBy.add(props.currentUser);
     }
     props.setBill({ ...props.bill });
     setActive(!active);
@@ -55,7 +53,7 @@ function ItemCard(props: IItemCard) {
       <ItemNameTitle>{props.item.name}</ItemNameTitle>
       <PriceTitle>{"$" + props.item.price}</PriceTitle>
       <Stack direction="row" spacing={2}>
-        {props.item.claimedBy?.map((name) => (
+        {[...props.item.claimedBy].map((name) => (
           <NameSpan key={name}>{name}</NameSpan>
         ))}
         <AddUserButton {...props} />

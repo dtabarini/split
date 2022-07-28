@@ -18,7 +18,7 @@ interface IAddUserButton {
 function AddUserButton(props: IAddUserButton) {
   function handleButton(event: any, name: string) {
     event.stopPropagation();
-    props.item.claimedBy.push(name);
+    props.item.claimedBy.add(name);
     props.setBill({ ...props.bill });
     setAnchorEl(null);
   }

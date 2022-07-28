@@ -13,21 +13,21 @@ let testItem1: Item = {
   name: "Pad Thai",
   price: 12,
   quantity: 1,
-  claimedBy: [],
+  claimedBy: new Set<string>(),
 };
 let testItem2: Item = {
   id: "2",
   name: "Green Curry",
   price: 14,
   quantity: 1,
-  claimedBy: [],
+  claimedBy: new Set<string>(),
 };
 let testItem3: Item = {
   id: "3",
   name: "Fried Rice",
   price: 12,
   quantity: 1,
-  claimedBy: [],
+  claimedBy: new Set<string>(),
 };
 
 let testItem4: Item = {
@@ -35,26 +35,33 @@ let testItem4: Item = {
   name: "Singh ha",
   price: 25,
   quantity: 1,
-  claimedBy: [],
+  claimedBy: new Set<string>(),
 };
 let testItem5: Item = {
   id: "5",
   name: "Red Curry",
   price: 14,
   quantity: 1,
-  claimedBy: [],
+  claimedBy: new Set<string>(),
 };
 let testItem6: Item = {
   id: "6",
   name: "Drunken Noodles",
   price: 12,
   quantity: 1,
-  claimedBy: [],
+  claimedBy: new Set<string>(),
 };
 
 const testBill: Bill = {
   Id: "string",
-  Items: [testItem1, testItem2, testItem3, testItem4, testItem5, testItem6],
+  Items: new Set<Item>([
+    testItem1,
+    testItem2,
+    testItem3,
+    testItem4,
+    testItem5,
+    testItem6,
+  ]),
   Tax: 0.0823,
   Total: 38,
   Tip: 3,
@@ -92,7 +99,7 @@ function ClaimBill() {
       <NameTitle>{"Select items for yourself"}</NameTitle>
       <NameTitle>{"Press '+' to assign for others"}</NameTitle>
       <Title>Items</Title>
-      {bill.Items.map((item, idx) => (
+      {[...bill.Items].map((item, idx) => (
         <ItemCard
           key={idx}
           item={item}

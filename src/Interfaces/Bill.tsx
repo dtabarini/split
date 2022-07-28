@@ -1,7 +1,7 @@
 import Item from "./Item";
 export default interface Bill {
   Id: string;
-  Items: Item[];
+  Items: Set<Item>;
   Tax: number;
   Tip: number;
   Total: number;
