@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 
 const AppArea = styled.div`

@@ -1,7 +1,7 @@
 export default interface Item {
-    name: string,
-    price: number,
-    quantity: number,
-    isClaimed: boolean,
-    claimedBy?: string
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  claimedBy?: string[];
 }

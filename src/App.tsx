@@ -29,7 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/edit" element={<EditBill />}></Route>
-          <Route path="/view" element={<ClaimBill />}></Route>
+          <Route path="/claim" element={<ClaimBill />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-//import Button from '@mui/material/core/Button';
+const EmptySpace = styled.div`
+  height: 200px;
+`;
+
+const LandingPageContainer = styled.div`
+  text-align: center;
+`;
 
 function LandingPage() {
-  const [codeNotFound, setCodeNotFound] = useState<boolean>(false);
-  const handleClick = () => {
-    setCodeNotFound(!codeNotFound);
+  let navigate = useNavigate();
+
+  const handleJoinClick = () => {
+    navigate("./claim");
   };
+
   return (
-    <div className="test">
+    <LandingPageContainer>
       Landing page
+      <EmptySpace></EmptySpace>
       <Stack spacing={2}>
         <Button variant="contained">Create</Button>
-        <Button variant="outlined">Join</Button>
+        <Button variant="outlined" onClick={handleJoinClick}>
+          Join
+        </Button>
       </Stack>
-    </div>
+    </LandingPageContainer>
   );
 }
 
